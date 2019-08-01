@@ -2,10 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
-import Datetime from 'react-datetime'
-import Card from '../news/Card'
+import Card from './Card'
 
-class Headlines extends React.Component {
+class TechNews extends React.Component {
 
   constructor() {
     super()
@@ -13,48 +12,24 @@ class Headlines extends React.Component {
     this.state = {
       articles: [],
       searchTerm: '',
-      sortTerm: 'name|asc',
-      today: '',
-      heldWord: ''
+      sortTerm: 'name|asc'
+
     }
 
     this.filterEngSources = this.filterEngSources.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.todayDate = this.todayDate.bind(this)
-    this.storeValue = this.storeValue.bind(this)
 
   }
-
-  todayDate() {
-    const currentDate = new Date()
-    const day = currentDate.getDay()
-    const month = currentDate.getMonth()
-    const year = currentDate.getFullYear()
-
-    const today = year + '-' + month + '-' + day
-
-    return today
-
-  }
-
-  // const today = this.todayDate()
-
 
   componentDidMount() {
-    axios.get('https://newsapi.org/v2/everything', {
+    axios.get('https://newsapi.org/v2/top-headlines', {
       params: {
-        q: 'apple',
-        from: this.todayDate,
-        to: this.todayDate,
+        category: 'technology',
         apiKey: '0c5b27859ce2479099ef31d424c5e114'
       }
     })
       .then(res => this.setState({ articles: res.data.articles}))
-  }
-
-  storeValue(e){
-    this.setState({ heldWord: e.target.value })
   }
 
   handleKeyUp(e) {
@@ -62,7 +37,7 @@ class Headlines extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ sortTerm: this.state.heldWord })
+    this.setState({ sortTerm: e.target.value })
   }
 
 
@@ -79,7 +54,6 @@ class Headlines extends React.Component {
   }
 
   render() {
-    console.log(this.todayDate())
     if(!this.state.articles) return null
     return(
       <section className="section">
@@ -87,8 +61,7 @@ class Headlines extends React.Component {
 
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
-              <h1 className="title is-1">Todays World News</h1>
-              <h2 className="subtitle is-6">News from the past 24 hours from across the globe</h2>
+              <h1 className="title is-1">Tech News</h1>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">
@@ -134,4 +107,4 @@ class Headlines extends React.Component {
 
 }
 
-export default Headlines
+export default TechNews

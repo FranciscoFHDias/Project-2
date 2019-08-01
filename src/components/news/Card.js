@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({ title, image, description }) => {
+const Card = ({ title, image, description, author, date }) => {
   return(
     <div className="card">
       <div className="card-image">
@@ -13,7 +13,12 @@ const Card = ({ title, image, description }) => {
       </div>
       <div className="card-content">
         <div className="content is-6">{description}</div>
+        <div className="content is-7">{author}</div>
+        <div className="content is-7">{date}</div>
       </div>
     </div>
   )
 }
+
+
+export default Card

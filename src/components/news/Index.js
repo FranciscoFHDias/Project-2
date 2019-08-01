@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
+import Card from './Card'
 
 class WorldNews extends React.Component {
 
@@ -84,19 +85,12 @@ class WorldNews extends React.Component {
           <div className="columns is-multiline">
             {this.filterEngSources().map(article =>
               <div key={article.url} className="column is-half-tablet is-one-quarter-desktop">
-                <div className="card">
-                  <div className="card-image">
-                    <figure className="image">
-                      <img src={article.urlToImage} alt={article.title} />
-                    </figure>
-                  </div>
-                  <div className="card-header">
-                    <div className="card-header-title">{article.title}</div>
-                  </div>
-                  <div className="card-content">
-                    <div className="content is-6">{article.description}</div>
-                  </div>
-                </div>
+                <Card
+                  title={article.title}
+                  image={article.urlToImage}
+                  author={article.author}
+                  description={article.description}
+                />
               </div>
             )}
           </div>
