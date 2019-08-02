@@ -12,34 +12,37 @@ class GermanNews extends React.Component {
     this.state = {
       articles: [],
       searchTerm: '',
-      sortTerm: 'name|asc'
-
+      sortTerm: 'name|asc',
+      heldWord: ''
     }
 
     this.filterEngSources = this.filterEngSources.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
-
+    this.storeValue = this.storeValue.bind(this)
   }
 
   componentDidMount() {
     axios.get('https://newsapi.org/v2/top-headlines', {
       params: {
         country: 'de',
-        apiKey: '0c5b27859ce2479099ef31d424c5e114'
+        apiKey: process.env.NEWS_API
       }
     })
       .then(res => this.setState({ articles: res.data.articles}))
+  }
+
+  storeValue(e){
+    this.setState({ heldWord: e.target.value })
   }
 
   handleKeyUp(e) {
     this.setState({ searchTerm: e.target.value })
   }
 
-  handleChange(e) {
-    this.setState({ sortTerm: e.target.value })
+  handleChange() {
+    this.setState({ sortTerm: this.state.heldWord })
   }
-
 
   filterEngSources() {
     const re = new RegExp(this.state.searchTerm, 'i')

@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import {Link} from 'react-router-dom'
-import Datetime from 'react-datetime'
 import Card from '../news/Card'
 
 class Headlines extends React.Component {
@@ -15,86 +14,141 @@ class Headlines extends React.Component {
       searchTerm: '',
       sortTerm: 'name|asc',
       today: '',
-      heldWord: ''
+      heldWord: '',
+      fromDate: this.today(),
+      toDate: ''
     }
 
     this.filterEngSources = this.filterEngSources.bind(this)
-    this.handleKeyUp = this.handleKeyUp.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.todayDate = this.todayDate.bind(this)
-    this.storeValue = this.storeValue.bind(this)
+    this.storeSortValue = this.storeSortValue.bind(this)
+    this.storeSearchValue = this.storeSearchValue.bind(this)
+    this.getMoreArticles = this.getMoreArticles.bind(this)
+    this.today = this.today.bind()
+    this.yesterday = this.yesterday.bind(this)
+    this.lastWeek = this.lastWeek.bind(this)
+    this.lastMonth = this.lastMonth.bind(this)
+    this.storeSortedValue = this.storeSortedValue.bind(this)
 
   }
 
-  todayDate() {
-    const currentDate = new Date()
-    const day = currentDate.getDay()
-    const month = currentDate.getMonth()
-    const year = currentDate.getFullYear()
-
-    const today = year + '-' + month + '-' + day
-
+  today() {
+    const today = new Date().toISOString().replace(/T.*/,'').split('-').join('-')
     return today
 
   }
 
-  // const today = this.todayDate()
+  yesterday() {
+    const current = new Date()
+    const yesterday = new Date(current.getTime() - 86400000)
+    const theYesterday = yesterday.toISOString().replace(/T.*/,'').split('-').join('-')
+    return theYesterday
+
+  }
+
+  lastWeek() {
+    const current = new Date()
+    const lastWeek = new Date(current.getTime() - (86400000 * 7))
+    const theLastWeek = lastWeek.toISOString().replace(/T.*/,'').split('-').join('-')
+    return theLastWeek
+
+  }
+
+  lastMonth() {
+    const current = new Date()
+    const lastMonth = new Date(current.getTime() - (86400000 * 30))
+    const theLastMonth = lastMonth.toISOString().replace(/T.*/,'').split('-').join('-')
+    return theLastMonth
+
+  }
+
+
 
 
   componentDidMount() {
     axios.get('https://newsapi.org/v2/everything', {
       params: {
-        q: 'apple',
-        from: this.todayDate,
-        to: this.todayDate,
-        apiKey: '0c5b27859ce2479099ef31d424c5e114'
+        q: 'world',
+        from: this.today(),
+        to: this.today(),
+        apiKey: process.env.NEWS_API
       }
     })
       .then(res => this.setState({ articles: res.data.articles}))
   }
 
-  storeValue(e){
-    this.setState({ heldWord: e.target.value })
+  getMoreArticles(e) {
+    if(e) e.preventDefault()
+    axios.get('https://newsapi.org/v2/everything', {
+      params: {
+        q: this.state.searchTerm || 'world',
+        from: this.state.fromDate,
+        to: this.today(),
+        apiKey: process.env.NEWS_API
+      }
+    })
+      .then(res => this.setState({ articles: res.data.articles}))
   }
 
-  handleKeyUp(e) {
+
+  storeSortedValue(e){
+    this.setState({ fromDate: e.target.value }, () => {
+      this.getMoreArticles()
+    })
+  }
+
+  storeSortValue(e){
+    this.setState({ sortTerm: e.target.value })
+  }
+
+  storeSearchValue(e){
     this.setState({ searchTerm: e.target.value })
   }
 
-  handleChange(e) {
-    this.setState({ sortTerm: this.state.heldWord })
-  }
+
 
 
   filterEngSources() {
-    const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-
-    const filterSources = _.filter(this.state.articles, article => {
-      return re.test(article.title) || re.test(article.author) || re.test(article.publishedAt) || re.test(article.content)
-    })
+    const filterSources = this.state.articles
     const sortedSources = _.orderBy(filterSources, [field], [order])
-
     return sortedSources
   }
 
   render() {
-    console.log(this.todayDate())
     if(!this.state.articles) return null
     return(
       <section className="section">
         <div className="container">
+
+          <div className="column">
+            <form className="control">
+              <label className="radio">
+                <input type="radio" name="timeframe" value={this.yesterday()} onChange={this.storeSortedValue}/> News from the past 24hrs
+              </label>
+              <label className="radio">
+                <input type="radio" name="timeframe" value={this.lastWeek()} onChange={this.storeSortedValue}/> News from the past Week
+              </label>
+              <label className="radio">
+                <input type="radio" name="timeframe" value={this.lastMonth()} onChange={this.storeSortedValue}/> News from the past Month
+              </label>
+            </form>
+          </div>
+
+          <hr/>
 
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
               <h1 className="title is-1">Todays World News</h1>
               <h2 className="subtitle is-6">News from the past 24 hours from across the globe</h2>
             </div>
+
+
+
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">
                 <div className="control is-expanded">
                   <div className="select is-fullwidth">
-                    <select onChange={this.storeValue}>
+                    <select onChange={this.storeSortValue}>
                       <option value="publishedAt|asc">Newest-Oldest</option>
                       <option value="publishedAt|desc">Oldest-Newest</option>
                       <option value="title|asc">Name A-Z</option>
@@ -108,9 +162,18 @@ class Headlines extends React.Component {
               </div>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
-              <div className="field">
-                <input placeholder="search" className="input" onKeyUp={this.handleKeyUp} />
-              </div>
+              <form onSubmit={this.getMoreArticles}>
+                <div className="field has-addons">
+                  <div className="control is-expanded">
+                    <div className="is-fullwidth">
+                      <input placeholder="search" className="input" onChange={this.storeSearchValue} />
+                    </div>
+                  </div>
+                  <div className="control">
+                    <button type="submit" className="button is-primary">Choose</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
           <div className="columns is-multiline">
@@ -129,6 +192,7 @@ class Headlines extends React.Component {
           </div>
         </div>
       </section>
+
     )
   }
 

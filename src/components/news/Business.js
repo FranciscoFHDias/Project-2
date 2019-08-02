@@ -12,32 +12,36 @@ class BusinessNews extends React.Component {
     this.state = {
       articles: [],
       searchTerm: '',
-      sortTerm: 'name|asc'
-
+      sortTerm: 'name|asc',
+      heldWord: ''
     }
 
     this.filterEngSources = this.filterEngSources.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
-
+    this.storeValue = this.storeValue.bind(this)
   }
 
   componentDidMount() {
     axios.get('https://newsapi.org/v2/top-headlines', {
       params: {
         category: 'business',
-        apiKey: '0c5b27859ce2479099ef31d424c5e114'
+        apiKey: process.env.NEWS_API
       }
     })
       .then(res => this.setState({ articles: res.data.articles}))
+  }
+
+  storeValue(e){
+    this.setState({ heldWord: e.target.value })
   }
 
   handleKeyUp(e) {
     this.setState({ searchTerm: e.target.value })
   }
 
-  handleChange(e) {
-    this.setState({ sortTerm: e.target.value })
+  handleChange() {
+    this.setState({ sortTerm: this.state.heldWord })
   }
 
 
@@ -58,20 +62,24 @@ class BusinessNews extends React.Component {
     return(
       <section className="section">
         <div className="container">
-
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
-              <h1 className="title is-1">Business News</h1>
+              <h1 className="title is-1">China Headlines</h1>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
-              <div className="field">
-                <div className="select is-fullwidth">
-                  <select onChange={this.handleChange}>
-                    <option value="publishedAt|asc">Newest-Oldest</option>
-                    <option value="publishedAt|desc">Oldest-Newest</option>
-                    <option value="title|asc">Name A-Z</option>
-                    <option value="title|desc">Name Z-A</option>
-                  </select>
+              <div className="field has-addons">
+                <div className="control is-expanded">
+                  <div className="select is-fullwidth">
+                    <select onChange={this.storeValue}>
+                      <option value="publishedAt|asc">Newest-Oldest</option>
+                      <option value="publishedAt|desc">Oldest-Newest</option>
+                      <option value="title|asc">Name A-Z</option>
+                      <option value="title|desc">Name Z-A</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="control">
+                  <button type="submit" onClick={this.handleChange} className="button is-primary">Choose</button>
                 </div>
               </div>
             </div>

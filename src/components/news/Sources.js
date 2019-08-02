@@ -19,8 +19,13 @@ class NewsSources extends React.Component {
 
   }
 
+
   componentDidMount() {
-    axios.get('https://newsapi.org/v2/sources?apiKey=0c5b27859ce2479099ef31d424c5e114')
+    axios.get('https://newsapi.org/v2/sources', {
+      params: {
+        apiKey: process.env.NEWS_API
+      }
+    })
       .then(res => this.setState({ sources: res.data.sources}))
   }
 

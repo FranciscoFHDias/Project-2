@@ -69,8 +69,6 @@ class Navbar extends React.Component {
                   <Link to="/news/Russia" className="navbar-item">Russia</Link>
                   <Link to="/news/Spain" className="navbar-item">Spain</Link>
                   <Link to="/news/UnitedKingdom" className="navbar-item">United Kingdom</Link>
-                  <hr className="navbar-divider"></hr>
-                  <div className="navbar-item">Custom</div>
                 </div>
               </div>
               <div className={`navbar-item has-dropdown ${this.state.columnTwoOpen ? 'is-active' : ''}`} onClick={this.toggleColumnTwo}>
@@ -79,12 +77,12 @@ class Navbar extends React.Component {
                   <Link to="/news/Politics" className="navbar-item">Politics</Link>
                   <Link to="/news/Business" className="navbar-item">Business</Link>
                   <Link to="/news/Tech" className="navbar-item">Tech</Link>
-                  <hr className="navbar-divider"></hr>
-                  <div className="navbar-item">Custom</div>
                 </div>
-                <div className="navbar-end">
-                  <Link to="/news/Sources" className="navbar-item">Sources</Link>
-                </div>
+              </div>
+            </div>
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <Link to="/news/Sources" className="navbar-item">Sources</Link>
               </div>
             </div>
           </div>

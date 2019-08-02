@@ -2,10 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-
 import NewsSources from './components/news/Sources'
 import Navbar from './components/common/Navbar'
-import FilterBar from './components/common/FilterBar'
 import WorldNews from './components/news/Index'
 import Headlines from './components/pages/Home'
 import NewsShow from './components/news/Show'
@@ -29,8 +27,6 @@ class App extends React.Component {
     return(
       <HashRouter>
         <Navbar />
-        <FilterBar />
-
         <Switch>
           <Route path="/news/Sources" component={NewsSources} />
           <Route path="/news/Germany" component={GermanNews} />
