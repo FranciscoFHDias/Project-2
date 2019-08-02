@@ -65,7 +65,8 @@ class ItalyNews extends React.Component {
 
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
-              <h1 className="title is-1">Italy Headlines</h1>
+              <h1 className="title is-1">Notizie italiane</h1>
+              <h2 className="subtitle is-6">Notizie filtrate dalle fonti di notizie più popolari in tutto il mondo</h2>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">

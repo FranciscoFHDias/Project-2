@@ -64,7 +64,8 @@ class GermanNews extends React.Component {
 
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
-              <h1 className="title is-1">Germany Headlines</h1>
+              <h1 className="title is-1">Deutsche Nachrichten</h1>
+              <h2 className="subtitle is-6">Gefilterte Nachrichten aus den beliebtesten Nachrichtenquellen auf der ganzen Welt.</h2>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">

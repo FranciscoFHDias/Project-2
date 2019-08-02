@@ -66,7 +66,7 @@ class TechNews extends React.Component {
 
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
-              <h1 className="title is-1">China Headlines</h1>
+              <h1 className="title is-1">Tech Headlines</h1>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">

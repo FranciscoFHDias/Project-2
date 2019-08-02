@@ -31,6 +31,8 @@ class Headlines extends React.Component {
 
   }
 
+
+
   today() {
     const today = new Date().toISOString().replace(/T.*/,'').split('-').join('-')
     return today
@@ -93,6 +95,7 @@ class Headlines extends React.Component {
   storeSortedValue(e){
     this.setState({ fromDate: e.target.value }, () => {
       this.getMoreArticles()
+
     })
   }
 
@@ -105,14 +108,13 @@ class Headlines extends React.Component {
   }
 
 
-
-
   filterEngSources() {
     const [field, order] = this.state.sortTerm.split('|')
     const filterSources = this.state.articles
     const sortedSources = _.orderBy(filterSources, [field], [order])
     return sortedSources
   }
+
 
   render() {
     if(!this.state.articles) return null
@@ -139,7 +141,7 @@ class Headlines extends React.Component {
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
               <h1 className="title is-1">Todays World News</h1>
-              <h2 className="subtitle is-6">News from the past 24 hours from across the globe</h2>
+              <h2 className="subtitle is-6">Time-filtered News from the most popular news sources across the globe.</h2>
             </div>
 
 
@@ -148,7 +150,7 @@ class Headlines extends React.Component {
               <div className="field has-addons">
                 <div className="control is-expanded">
                   <div className="select is-fullwidth">
-                    <select onChange={this.storeSortValue}>
+                    <select onChange={this.storeSortValue} >
                       <option value="publishedAt|asc">Newest-Oldest</option>
                       <option value="publishedAt|desc">Oldest-Newest</option>
                       <option value="title|asc">Name A-Z</option>
@@ -166,7 +168,7 @@ class Headlines extends React.Component {
                 <div className="field has-addons">
                   <div className="control is-expanded">
                     <div className="is-fullwidth">
-                      <input placeholder="search" className="input" onChange={this.storeSearchValue} />
+                      <input placeholder="Search by keyword" className="input" onChange={this.storeSearchValue} />
                     </div>
                   </div>
                   <div className="control">

@@ -22,11 +22,11 @@ class Navbar extends React.Component {
   }
 
   toggleColumnOne() {
-    this.setState({ columnOneOpen: !this.state.columnOneOpen })
+    this.setState({ columnOneOpen: !this.state.columnOneOpen})
   }
 
   toggleColumnTwo() {
-    this.setState({ columnTwoOpen: !this.state.columnTwoOpen })
+    this.setState({ columnTwoOpen: !this.state.columnTwoOpen})
   }
 
   componentDidUpdate(prevProps) {
@@ -59,7 +59,7 @@ class Navbar extends React.Component {
 
           <div className={`navbar-menu  ${this.state.navbarOpen ? 'is-active' : ''}`}>
             <div className="navbar-start">
-              <div className={`navbar-item has-dropdown ${this.state.columnOneOpen ? 'is-active' : ''}`} onClick={this.toggleColumnOne}>
+              <div className={`navbar-item has-dropdown is-hoverable ${this.state.columnOneOpen ? 'is-active' : ''}`} onClick={this.toggleColumnOne}>
                 <a className="navbar-link">World Wide News</a>
                 <div className="navbar-dropdown">
                   <Link to="/news/China" className="navbar-item">China</Link>
@@ -71,7 +71,7 @@ class Navbar extends React.Component {
                   <Link to="/news/UnitedKingdom" className="navbar-item">United Kingdom</Link>
                 </div>
               </div>
-              <div className={`navbar-item has-dropdown ${this.state.columnTwoOpen ? 'is-active' : ''}`} onClick={this.toggleColumnTwo}>
+              <div className={`navbar-item has-dropdown is-hoverable ${this.state.columnTwoOpen ? 'is-active' : ''}`} onClick={this.toggleColumnTwo}>
                 <a className="navbar-link">Category</a>
                 <div className="navbar-dropdown">
                   <Link to="/news/Politics" className="navbar-item">Politics</Link>
