@@ -66,7 +66,7 @@ class RussiaNews extends React.Component {
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
               <h1 className="title is-1">Русские новости</h1>
-              <h2 className="subtitle is-6">Отфильтрованные новости из самых популярных источников новостей по всему миру</h2>
+              <h2 className="subtitle is-6">Отфильтрованные новости из самых популярных источников по всему миру</h2>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">

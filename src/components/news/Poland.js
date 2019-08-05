@@ -66,7 +66,7 @@ class PolandNews extends React.Component {
           <div className="columns is-multiline">
             <div className="column is-half-tablet is-half-desktop">
               <h1 className="title is-1">Wiadomości Polskie</h1>
-              <h2 className="subtitle is-6">Filtrowane Wiadomości z najpopularniejszych źródeł wiadomości na całym świecie</h2>
+              <h2 className="subtitle is-6">Filtrowane Wiadomości z najpopularniejszych źródeł na całym świecie</h2>
             </div>
             <div className="column is-one-quarter-tablet is-one-quarter-desktop">
               <div className="field has-addons">

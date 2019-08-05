@@ -61,7 +61,7 @@ class Navbar extends React.Component {
             <div className="navbar-start">
               <div className={`navbar-item has-dropdown is-hoverable ${this.state.columnOneOpen ? 'is-active' : ''}`} onClick={this.toggleColumnOne}>
                 <a className="navbar-link">World Wide News</a>
-                <div className="navbar-dropdown">
+                <div className="navbar-dropdown is-hoverable">
                   <Link to="/news/China" className="navbar-item">China</Link>
                   <Link to="/news/Germany" className="navbar-item">Germany</Link>
                   <Link to="/news/Italy" className="navbar-item">Italy</Link>
