@@ -41,7 +41,7 @@ Build a React application in 48hrs with the following requirements:
 * Insomnia
 ### Approach Taken
 
-##Find a public API
+## Find a public API
 We used different sources [ProgrammableWeb](https://www.programmableweb.com/), [The Rapid API](https://blog.rapidapi.com/), [Medium] (https://medium.com/) and others. We agreed on using The News API (https://newsapi.org) because it offers different request routes and a generous requests to API allowance.
 We used Insomnia to fully understand the data returned by each route request available. With full understanding of the data available we started drawing the wireframes and the sitemap on paper.
 We started the coding process by installing a number of Node JS packs such as WebPack and loaders such as Babel, etc. We also setup Git and GitHub from the outset to track progress and changes during the project.
@@ -55,16 +55,17 @@ MVP
 
 ### Wins
 The API was very limited and patchy on the offered 10 properties:
-source
-*id
-*name
-*authored
-*title
-*description
-*url
-*urlToImage
-*publishedAt
-*content
+* source
+* id
+* name
+* authored
+* title
+* description
+* url
+* urlToImage
+* publishedAt
+* content
+
 We decided to expand on the publishedAt key in order to create functions that let you filter by time, up to one month ago. This was a fun challenge and allowed us to play around with Javascripts in-built new Date function.
 
 ### Blockers
