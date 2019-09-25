@@ -19,9 +19,9 @@ World News Website was co-authored between two  General Assembly's Software Engi
 ## Project Brief
 
 Build a React application in 48hrs with the following requirements:
-*** Consumes a public API
-*** Have several components
-*** The app should include a router
+  * Consumes a public API
+  * Have several components
+  * The app should include a router
 
 ## Project Execution
 
