@@ -1,4 +1,5 @@
 # **Project 2: World News Website**
+![Screenshot 2019-09-25 at 16 36 37](https://user-images.githubusercontent.com/49660544/65616278-b415a180-dfb2-11e9-9a2b-f9d33b4d0bf7.png)
 
 ## Overview
 
