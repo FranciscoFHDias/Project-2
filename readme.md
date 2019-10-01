@@ -2,7 +2,12 @@
 # **Project Two: World News Website**
 
 [Launch World News Website](https://franciscofhdias.github.io/Project-2/#/)
+
 <img width="1391" alt="World News Website Screenshot" src="https://user-images.githubusercontent.com/49660544/65616278-b415a180-dfb2-11e9-9a2b-f9d33b4d0bf7.png">
+
+## Team
+* **Francisco Dias** - [GitHub](https://github.com/FranciscoFHDias)
+* **Ania Kubow** - [GitHub](https://github.com/Mathsteacher7)
 
 ## Overview
 
