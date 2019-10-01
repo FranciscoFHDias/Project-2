@@ -155,6 +155,5 @@ Example of the request:
 **Blockers**
 * The API did not offer the full article content, only a snippet of text with the article url. We circonferenced the problem by using an iframe to display the news article. We belived this was a better option than having the user dnavigate away from our website.
 
-## Future Content
-
 ## What we learnt
+Further, from solidifying the fundamentals of JS and React, it exposed me to creating single-page applications and the pros and cons of both multi and single-page applications.
