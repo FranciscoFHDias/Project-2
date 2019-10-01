@@ -39,14 +39,35 @@ World News Website is a news aggregator which consumes an external public api ge
 
 ### Approach Taken
 
-## Find a public API
-We used different sources [ProgrammableWeb](https://www.programmableweb.com/), [The Rapid API](https://blog.rapidapi.com/), [Medium] (https://medium.com/) and others. We agreed on using The News API (https://newsapi.org) because it offers different request routes and a generous requests to API allowance.
-We used Insomnia to fully understand the data returned by each route request available. With full understanding of the data available we started drawing the wireframes and the sitemap on paper.
-We started the coding process by installing a number of Node JS packs such as WebPack and loaders such as Babel, etc. We also setup Git and GitHub from the outset to track progress and changes during the project.
+#### Planning 
+
+> **Find a public API** 
+I started by researching a realiable external APIs through different sources such as:
+* [ProgrammableWeb](https://www.programmableweb.com/), 
+* [The Rapid API](https://blog.rapidapi.com/), 
+* [Medium](https://medium.com/),
+* [The News API](https://newsapi.org)
+
+After researching and using Insomnia to fully understand the data returned by each API I decided to go with the [The News API](https://newsapi.org) because it offers different request routes and a generous requests to API allowance.
+
+> **User Stories/Wireframes**
+With full understanding of the data available I started drawing the wireframes and the user sitemap/journey on paper. 
+
+> **MVP Features**
+  * All news index page
+  * Detail view for each article
+  * Custom search filter
+  * Sort by date published and alphabet
+
+> **Communication and Action Plan** - We spent the first couple of hours agreeing how we would work together and keep each other informed of progress. We then listed all the required actions in order to achive MVP and we used Trello to record this. Trello was also handy to keep track of progress. We also spent a few minutes both mornings reviewing what we achieved the day before and what we would work towards in the hours ahead. 
+
+#### Execution 
+
+> **Setting-up the project** 
+We started the coding process by installing  Node JS packs, WebPack, Express and other other libraries such as Babel. We also setup Git and GitHub from the outset to track progress and changes during the project.
 dotenv to ensure our API key was safe.
 
 ## Features 
-
 The World News Website offers:
 
 * World News which will allow the user to:
@@ -59,6 +80,7 @@ The World News Website offers:
    * Extend search to last 48hours/Week/Month from the 24hrs which is display initially.
    
 World News Website was co-authored between two  General Assembly's Software Engineering Immersive students.
+
 
 ## The logic  and coding process
 component by component in a logical order
