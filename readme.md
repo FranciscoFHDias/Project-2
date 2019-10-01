@@ -41,7 +41,7 @@ World News Website is a news aggregator which consumes an external public api ge
 
 #### Planning 
 
-> **Find a public API** 
+**Find a public API** 
 I started by researching a realiable external APIs through different sources such as:
 * [ProgrammableWeb](https://www.programmableweb.com/), 
 * [The Rapid API](https://blog.rapidapi.com/), 
@@ -50,62 +50,110 @@ I started by researching a realiable external APIs through different sources suc
 
 After researching and using Insomnia to fully understand the data returned by each API I decided to go with the [The News API](https://newsapi.org) because it offers different request routes and a generous requests to API allowance.
 
-> **User Stories/Wireframes**
+**User Stories/Wireframes**
 With full understanding of the data available I started drawing the wireframes and the user sitemap/journey on paper. 
 
-> **MVP Features**
+**MVP Features**
   * All news index page
   * Detail view for each article
   * Custom search filter
   * Sort by date published and alphabet
 
-> **Communication and Action Plan** - We spent the first couple of hours agreeing how we would work together and keep each other informed of progress. We then listed all the required actions in order to achive MVP and we used Trello to record this. Trello was also handy to keep track of progress. We also spent a few minutes both mornings reviewing what we achieved the day before and what we would work towards in the hours ahead. 
+**Communication and Action Plan** 
+We spent the first couple of hours agreeing how we would work together and keep each other informed of progress. We then listed all the required actions in order to achive MVP and we used Trello to record this. Trello was also handy to keep track of progress. We also spent a few minutes both mornings reviewing what we achieved the day before and what we would work towards in the hours ahead. 
 
 #### Execution 
 
-> **Setting-up the project** 
-We started the coding process by installing  Node JS packs, WebPack, Express and other other libraries such as Babel. We also setup Git and GitHub from the outset to track progress and changes during the project.
-dotenv to ensure our API key was safe.
+**Setting-up the project** 
 
-## Features 
-The World News Website offers:
+We started the coding process by installing Node JS packs, WebPack and other libraries such as Babel and dotenv to ensure our API key was safe. We also setup Git and GitHub from the outset to track progress and changes during to the project. safe.
 
-* World News which will allow the user to:
-   * Custom search option for articles directly in The News API database
-   * Sort news by alphabet and publish date order
-   * Extend search to last 48hours/Week/Month from the 24hrs which is display initially
-   
-* Local Headlines which will allow the user to:
-   * See news in either German, Chinese, Italian, Polish and xxxx
-   * Extend search to last 48hours/Week/Month from the 24hrs which is display initially.
-   
-World News Website was co-authored between two  General Assembly's Software Engineering Immersive students.
+**Features Build**
+
+* Custom search option for articles directly in The News API database
+
+```js
+componentDidMount() {
+    axios.get('https://newsapi.org/v2/everything', {
+      params: {
+        q: 'world',
+        from: this.today(),
+        to: this.today(),
+        apiKey: process.env.NEWS_API
+      }
+    })
+      .then(res => this.setState({ articles: res.data.articles}))
+  }
+
+  getMoreArticles(e) {
+    if(e) e.preventDefault()
+    axios.get('https://newsapi.org/v2/everything', {
+      params: {
+        q: this.state.searchTerm || 'world',
+        from: this.state.fromDate,
+        to: this.today(),
+        apiKey: process.env.NEWS_API
+      }
+    })
+      .then(res => this.setState({ articles: res.data.articles}))
+  }
+```
+
+* Filter and Sort news by alphabet and publish date order
+
+```js
+storeSortedValue(e){
+    this.setState({ fromDate: e.target.value }, () => {
+      this.getMoreArticles()
+
+    })
+  }
+
+  storeSortValue(e){
+    this.setState({ sortTerm: e.target.value })
+  }
+
+  storeSearchValue(e){
+    this.setState({ searchTerm: e.target.value })
+  }
 
 
-## The logic  and coding process
-component by component in a logical order
-MVP
+  filterEngSources() {
+    const [field, order] = this.state.sortTerm.split('|')
+    const filterSources = this.state.articles
+    const sortedSources = _.orderBy(filterSources, [field], [order])
+    return sortedSources
+  }
+  
+  ```
+  
+* See news in either German, Chinese, Italian, Polish and others,
+
+Example of the request:
+
+```js
+  componentDidMount() {
+    axios.get('https://newsapi.org/v2/top-headlines', {
+      params: {
+        country: 'pl',
+        apiKey: process.env.NEWS_API
+      }
+    })
+      .then(res => this.setState({ articles: res.data.articles}))
+  }
+  
+  ```
 
 ## Wins and Blockers
 
-### Wins
-The API was very limited and patchy on the offered 10 properties:
-* source
-* id
-* name
-* authored
-* title
-* description
-* url
-* urlToImage
-* publishedAt
-* content
+**Wins**
+* Manipulate the API's data to make the most of it,
+* Creating filters and sort functionality,
+* Building the functionality to search all API's content in the serverside,
+* Use of new technologies such as iframe.
 
-We decided to expand on the publishedAt key in order to create functions that let you filter by time, up to one month ago. This was a fun challenge and allowed us to play around with Javascripts in-built new Date function.
-
-### Blockers
-The API we chose had a lot of objects to work with but was very patchy. Most of the articles were missing unique ids. To get around this we used the objects url as a unique identifier for our project.
-The API was also lacking in the full article content, and offered only a snippet of text with the article url. As we did not want the user to navigate away from our website, we used an iframe to display the news article on show. This meant we could retain the news articles visual identity on our website as well. In an ideal world, the API would have had enough information for us to avoid using the iframe.
+**Blockers**
+* The API did not offer the full article content, only a snippet of text with the article url. We circonferenced the problem by using an iframe to display the news article. We belived this was a better option than having the user dnavigate away from our website.
 
 ## Future Content
 
