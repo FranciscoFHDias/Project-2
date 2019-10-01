@@ -1,5 +1,8 @@
-# **Project 2: World News Website**
-![Screenshot 2019-09-25 at 16 36 37](https://user-images.githubusercontent.com/49660544/65616278-b415a180-dfb2-11e9-9a2b-f9d33b4d0bf7.png)
+![ga_cog_large_red_rgb](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png)
+# **Project Two: World News Website**
+
+[Launch World News Website](https://franciscofhdias.github.io/Project-2/#/)
+<img width="1391" alt="World News Website Screenshot" src="https://user-images.githubusercontent.com/49660544/65616278-b415a180-dfb2-11e9-9a2b-f9d33b4d0bf7.png">
 
 ## Overview
 
